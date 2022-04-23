@@ -1,6 +1,6 @@
 {
-  "name": "techno-vue-treeselect",
-  "version": "1.0.0",
+  "name": "@mail2gowthamganesan/techno-vue-treeselect",
+  "version": "1.0.1",
   "description": "Custom Vue Tree Select",
   "main": "dist/vue-treeselect.cjs.js",
   "unpkg": "dist/vue-treeselect.umd.min.js",
@@ -137,5 +137,19 @@
     "control",
     "input",
     "ui"
-  ]
+  ],
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mail2gowthamganesan/techno-vue-treeselect.git"
+  },
+  "author": "mail2gowthamganesan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mail2gowthamganesan/techno-vue-treeselect/issues"
+  },
+  "homepage": "https://github.com/mail2gowthamganesan/techno-vue-treeselect#readme"
 }
