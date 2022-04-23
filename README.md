@@ -25,7 +25,7 @@
 It's recommended to install vue-treeselect via npm, and build your app using a bundler like [webpack](https://webpack.js.org/).
 
 ```bash
-npm install --save @riophae/vue-treeselect
+npm install @mail2gowthamganesan/techno-vue-treeselect
 ```
 
 This example shows how to integrate vue-treeselect with your [Vue SFCs](https://vuejs.org/v2/guide/single-file-components.html).

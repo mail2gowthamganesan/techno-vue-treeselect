@@ -1,6 +1,6 @@
 {
   "name": "@mail2gowthamganesan/techno-vue-treeselect",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Custom Vue Tree Select",
   "main": "dist/vue-treeselect.cjs.js",
   "unpkg": "dist/vue-treeselect.umd.min.js",
