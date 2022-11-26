@@ -21,6 +21,7 @@ export const ASYNC_SEARCH = 'ASYNC_SEARCH'
 export const ALL = 'ALL'
 export const BRANCH_PRIORITY = 'BRANCH_PRIORITY'
 export const LEAF_PRIORITY = 'LEAF_PRIORITY'
+export const SECOND_LEAF_PRIORITY = 'SECOND_LEAF_PRIORITY'
 export const ALL_WITH_INDETERMINATE = 'ALL_WITH_INDETERMINATE'
 
 // Acceptable values of `sortValueBy` prop.
