@@ -731,7 +731,7 @@ export default {
         internalValue = this.forest.selectedNodeIds.filter(id => {
           const node = this.getNode(id)
           if (node.level && !node.isLeaf) return true
-          if (node.level === 1 && node.isLeaf && node.children && !node.children.length) return true;
+          if (node.level === 1 && node.isLeaf && !(node.children && node.children?.length)) return true;
           return node.parentNode ? !this.isSelected(node.parentNode) : !node.isRootNode;
         })
       } else if (this.valueConsistsOf === ALL_WITH_INDETERMINATE) {
