@@ -322,7 +322,7 @@ export default {
     instanceId: {
       // Add two trailing "$" to distinguish from explictly specified ids.
       default: () => `${instanceId++}$$`,
-      type: [String, Number],
+      type: [ String, Number ],
     },
 
     /**
@@ -374,7 +374,7 @@ export default {
      */
     matchKeys: {
       type: Array,
-      default: constant(['label']),
+      default: constant([ 'label' ]),
     },
 
     /**
@@ -449,7 +449,7 @@ export default {
       type: String,
       default: 'auto',
       validator(value) {
-        const acceptableValues = ['auto', 'top', 'bottom', 'above', 'below']
+        const acceptableValues = [ 'auto', 'top', 'bottom', 'above', 'below' ]
         return includes(acceptableValues, value)
       },
     },
@@ -561,7 +561,7 @@ export default {
       type: String,
       default: ALL_CHILDREN,
       validator(value) {
-        const acceptableValues = [ALL_CHILDREN, ALL_DESCENDANTS, LEAF_CHILDREN, LEAF_DESCENDANTS]
+        const acceptableValues = [ ALL_CHILDREN, ALL_DESCENDANTS, LEAF_CHILDREN, LEAF_DESCENDANTS ]
         return includes(acceptableValues, value)
       },
     },
@@ -585,7 +585,7 @@ export default {
       type: String,
       default: ORDER_SELECTED,
       validator(value) {
-        const acceptableValues = [ORDER_SELECTED, LEVEL, INDEX]
+        const acceptableValues = [ ORDER_SELECTED, LEVEL, INDEX ]
         return includes(acceptableValues, value)
       },
     },
@@ -619,7 +619,7 @@ export default {
       type: String,
       default: BRANCH_PRIORITY,
       validator(value) {
-        const acceptableValues = [ALL, BRANCH_PRIORITY, LEAF_PRIORITY, SECOND_LEAF_PRIORITY, ALL_WITH_INDETERMINATE]
+        const acceptableValues = [ ALL, BRANCH_PRIORITY, LEAF_PRIORITY, SECOND_LEAF_PRIORITY, ALL_WITH_INDETERMINATE ]
         return includes(acceptableValues, value)
       },
     },
@@ -640,7 +640,7 @@ export default {
      * z-index of the menu.
      */
     zIndex: {
-      type: [Number, String],
+      type: [ Number, String ],
       default: 999,
     },
   },
@@ -731,8 +731,8 @@ export default {
         internalValue = this.forest.selectedNodeIds.filter(id => {
           const node = this.getNode(id)
           if (node.level && !node.isLeaf) return true
-          if (node.level === 1 && node.isLeaf && !(node.children && node.children?.length)) return true;
-          return node.parentNode ? !this.isSelected(node.parentNode) : !node.isRootNode;
+          if (node.level === 1 && node.isLeaf && !(node.children && node.children.length)) return true
+          return node.parentNode ? !this.isSelected(node.parentNode) : !node.isRootNode
         })
       } else if (this.valueConsistsOf === ALL_WITH_INDETERMINATE) {
         const indeterminateNodeIds = []
@@ -1002,7 +1002,7 @@ export default {
         isBranch: false,
         isDisabled: false,
         isNew: false,
-        index: [-1],
+        index: [ -1 ],
         level: 0,
         raw,
       }
@@ -1016,10 +1016,10 @@ export default {
       if (this.valueFormat === 'id') {
         return this.multiple
           ? this.value.slice()
-          : [this.value]
+          : [ this.value ]
       }
 
-      return (this.multiple ? this.value : [this.value])
+      return (this.multiple ? this.value : [ this.value ])
         .map(node => this.enhancedNormalizer(node))
         .map(node => node.id)
     },
@@ -1033,7 +1033,7 @@ export default {
 
       const valueArray = this.multiple
         ? Array.isArray(this.value) ? this.value : []
-        : this.value ? [this.value] : []
+        : this.value ? [ this.value ] : []
       const matched = find(
         valueArray,
         node => node && this.enhancedNormalizer(node).id === id,
@@ -1067,6 +1067,14 @@ export default {
           if (!(node.parentNode.id in map)) map[node.parentNode.id] = node.parentNode.children.length
           if (--map[node.parentNode.id] === 0) queue.push(node.parentNode.id)
         }
+      } else if (this.valueConsistsOf === SECOND_LEAF_PRIORITY) {
+        nodeIdListOfPrevValue.forEach(nodeId => {
+          nextSelectedNodeIds.push(nodeId)
+          const node = this.getNode(nodeId)
+          if (node.isBranch) this.traverseDescendantsBFS(node, descendant => {
+            nextSelectedNodeIds.push(descendant.id)
+          })
+        })
       } else if (this.valueConsistsOf === ALL_WITH_INDETERMINATE) {
         const map = createMap()
         const queue = nodeIdListOfPrevValue.filter(nodeId => {
@@ -1530,8 +1538,8 @@ export default {
 
     normalize(parentNode, nodes, prevNodeMap) {
       let normalizedOptions = nodes
-        .map(node => [this.enhancedNormalizer(node), node])
-        .map(([node, raw], index) => {
+        .map(node => [ this.enhancedNormalizer(node), node ])
+        .map(([ node, raw ], index) => {
           this.checkDuplication(node)
           this.verifyNodeShape(node)
 
@@ -1554,7 +1562,7 @@ export default {
           this.$set(normalized, 'id', id)
           this.$set(normalized, 'label', label)
           this.$set(normalized, 'level', level)
-          this.$set(normalized, 'ancestors', isRootNode ? [] : [parentNode].concat(parentNode.ancestors))
+          this.$set(normalized, 'ancestors', isRootNode ? [] : [ parentNode ].concat(parentNode.ancestors))
           this.$set(normalized, 'index', (isRootNode ? [] : parentNode.index).concat(index))
           this.$set(normalized, 'parentNode', parentNode)
           this.$set(normalized, 'lowerCased', lowerCased)
